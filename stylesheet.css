@@ -10,7 +10,7 @@ body {
 }
 
 /* style adapted from my GEOM101 website https://shanemfleming.github.io/stylesheet.css */
-h1 {
+h1,h2,h3,header {
     font-family: Helvetica, Verdana, sans-serif;
     margin-bottom: 45px;
 }
