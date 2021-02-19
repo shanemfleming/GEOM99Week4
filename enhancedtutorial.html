@@ -27,14 +27,14 @@
                     esriConfig.apiKey = "AAPKc00670d2cf6f45c785a326d46a5483b9GmyYSH0NpEuXQByjfdbj5THuYNXpwK24JU7U2xkP_jEcBLPrgRyo5agF6lxVX4sl";
 
                     const map = new Map({
-                        basemap: "arcgis-newspaper" // Basemap chosen via https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
+                        basemap: "arcgis-modern-antique" // Basemap chosen via https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
                     })
 
                     // map centred on Paris, France (location of polygon layer)
                     const view = new MapView({
                         map: map,
                         center: [2.3497993151772203, 48.854934030347366], // Longitude, latitude
-                        zoom: 12, // Zoom level
+                        zoom: 11, // Zoom level
                         container: "viewDiv" // Div element
                     });
 
