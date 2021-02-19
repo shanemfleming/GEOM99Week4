@@ -14,12 +14,16 @@
                 "esri/config",
                 "esri/Map",
                 "esri/views/MapView",
-                "esri/widgets/Locate"],
+                "esri/widgets/Locate",
+                "esri/widgets/Track",
+                "esri/Graphic"],
                 function(
                     esriConfig,
                     Map,
                     MapView,
-                    Locate,)
+                    Locate,
+                    Track,
+                    Graphic,)
                 {
                     esriConfig.apiKey = "AAPKc00670d2cf6f45c785a326d46a5483b9GmyYSH0NpEuXQByjfdbj5THuYNXpwK24JU7U2xkP_jEcBLPrgRyo5agF6lxVX4sl";
 
@@ -43,6 +47,23 @@
                         }
                     });
 
+                    const track = new Track({
+                        view: view,
+                        graphic: new Graphic({
+                            symbol: {
+                                type: "simple-marker",
+                                size: "12px",
+                                color: "green",
+                                outline: {
+                                    color: "#efefef",
+                                    width: "1.5px"
+                                }
+                            }
+                        }),
+                        useHeadingEnabled: false
+                    });
+                    
+                    view.ui.add(track, "top-left");
                     view.ui.add(locate, "top-left");
                 }
             );
