@@ -1,30 +1,48 @@
-<!-- content pulled and altered from https://developers.arcgis.com/javascript/latest/display-a-map/ -->
+<!-- content pulled and altered from https://developers.arcgis.com/javascript/latest/display-a-map/ 
+    and https://developers.arcgis.com/javascript/latest/add-a-feature-layer/ -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title></title>
+        <title>Heart over Paris</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
         <link rel="stylesheet" type="text/css" href="stylesheet.css">
         <link rel="stylesheet" type="text/css" href="https://js.arcgis.com/4.18/esri/themes/light/main.css">
         <script src="https://js.arcgis.com/4.18/"></script>
         <script>
-            require(["esri/config","esri/Map", "esri/views/MapView"], function (esriConfig,Map, MapView) {
+            require([
+                "esri/config",
+                "esri/Map",
+                "esri/views/MapView",
+                "esri/layers/FeatureLayer",],
+                function(
+                    esriConfig,
+                    Map,
+                    MapView,
+                    FeatureLayer,)
+                {
+                    esriConfig.apiKey = "AAPKc00670d2cf6f45c785a326d46a5483b9GmyYSH0NpEuXQByjfdbj5THuYNXpwK24JU7U2xkP_jEcBLPrgRyo5agF6lxVX4sl";
 
-                esriConfig.apiKey = "AAPKc00670d2cf6f45c785a326d46a5483b9GmyYSH0NpEuXQByjfdbj5THuYNXpwK24JU7U2xkP_jEcBLPrgRyo5agF6lxVX4sl";
+                    const map = new Map({
+                        basemap: "arcgis-navigation" // Basemap layer service
+                    })
 
-                const map = new Map({
-                    basemap: "arcgis-topographic" // Basemap layer service
-                })
+                    // map centred on Paris, France (location of polygon layer)
+                    const view = new MapView({
+                        map: map,
+                        center: [48.854934030347366, 2.3497993151772203], // Longitude, latitude
+                        zoom: 10, // Zoom level
+                        container: "viewDiv" // Div element
+                    });
 
-                const view = new MapView({
-                    map: map,
-                    center: [-118.805, 34.027], // Longitude, latitude
-                    zoom: 13, // Zoom level
-                    container: "viewDiv" // Div element
-                });
+                    // Custom polygon layer created from GeoJSON written at http://geojson.io
+                    const heartLayer = new FeatureLayer({
+                        url: "https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/Heart_over_Paris/FeatureServer/0"
+                    });
 
-            });
+                    map.add(heartLayer, 0);
+                }
+            );
         </script>
     </head>
 
@@ -48,7 +66,7 @@
                 </li>
             </ul>
         </div>
-        
+
         <div id="viewDiv"></div>
     </body>
 </html>
