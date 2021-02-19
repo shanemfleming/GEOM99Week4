@@ -32,7 +32,7 @@
                     const view = new MapView({
                         map: map,
                         center: [2.3497993151772203, 48.854934030347366], // Longitude, latitude
-                        zoom: 10, // Zoom level
+                        zoom: 8, // Zoom level
                         container: "viewDiv" // Div element
                     });
 
@@ -63,7 +63,7 @@
                     const heartLayer = new FeatureLayer({
                         url: "https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/Heart_over_Paris/FeatureServer/0",
                         renderer: heartLayerRenderer,
-                        opacity: 0.5
+                        opacity: 0.75
                     });
 
                     map.add(heartLayer, 0);
