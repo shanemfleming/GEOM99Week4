@@ -33,7 +33,7 @@ p {
 /* Navbar design pulled from my GEOM101 website */
 /* for nav bar design, I referenced https://www.w3schools.com/css/css_navbar.asp and adjusted the format for my website */
 .navbarul {
-	background-color: #424242;
+	background-color: rgb(61, 46, 9);
 	list-style-type: none;
 	margin-bottom: 25px;
 	margin-top: 0;
@@ -51,7 +51,7 @@ p {
 .navbartxt {
 	font-family: Verdana, Helvetica, sans-serif;
 	font-weight: bold;
-	color: orange;
+	color: white;
 	text-decoration: none;
 }
 .navbaract {
