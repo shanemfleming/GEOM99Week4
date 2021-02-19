@@ -1,5 +1,6 @@
 <!-- content pulled and altered from https://developers.arcgis.com/javascript/latest/display-a-map/ 
-    and https://developers.arcgis.com/javascript/latest/add-a-feature-layer/ -->
+    and https://developers.arcgis.com/javascript/latest/add-a-feature-layer/ 
+    and https://developers.arcgis.com/javascript/latest/style-a-feature-layer/ -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -24,7 +25,7 @@
                     esriConfig.apiKey = "AAPKc00670d2cf6f45c785a326d46a5483b9GmyYSH0NpEuXQByjfdbj5THuYNXpwK24JU7U2xkP_jEcBLPrgRyo5agF6lxVX4sl";
 
                     const map = new Map({
-                        basemap: "arcgis-navigation" // Basemap layer service
+                        basemap: "arcgis-topographic" // Basemap layer service
                     })
 
                     // map centred on Paris, France (location of polygon layer)
@@ -35,9 +36,34 @@
                         container: "viewDiv" // Div element
                     });
 
+                    // Create custom style for the feature layer being added to the map
+                    function createFillSymbol(value, color) {
+                        return {
+                            "value": value,
+                            "symbol": {
+                                "color": color,
+                                "type": "simple-fill",
+                                "style": "solid",
+                                "outline": {
+                                    "style": "none"
+                                }
+                            },
+                            "label": value
+                        };
+                    }
+                    const heartLayerRenderer = {
+                        type: "unique-value",
+                        field: "ObjectId",
+                        uniqueValueInfos: [
+                            createFillSymbol("1", "#FFC0CB"),
+                        ]
+                    };
+
                     // Custom polygon layer created from GeoJSON written at http://geojson.io
                     const heartLayer = new FeatureLayer({
-                        url: "https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/Heart_over_Paris/FeatureServer/0"
+                        url: "https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/Heart_over_Paris/FeatureServer/0",
+                        renderer: heartLayerRenderer,
+                        opacity: 0.5
                     });
 
                     map.add(heartLayer, 0);
