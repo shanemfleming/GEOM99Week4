@@ -1,4 +1,5 @@
-<!-- content pulled and altered from https://developers.arcgis.com/javascript/latest/display-a-map/ -->
+<!-- content pulled and altered from https://developers.arcgis.com/javascript/latest/display-a-map/ 
+    and altered further according to https://developers.arcgis.com/javascript/latest/display-your-location/ -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,6 +7,46 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
         <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        <link rel="stylesheet" type="text/css" href="https://js.arcgis.com/4.18/esri/themes/light/main.css">
+        <script src="https://js.arcgis.com/4.18/"></script>
+        <script>
+            require([
+                "esri/config",
+                "esri/Map",
+                "esri/views/MapView",
+                "esri/widgets/Locate"],
+                function(
+                    esriConfig,
+                    Map,
+                    MapView,
+                    Locate,)
+                {
+                    esriConfig.apiKey = "AAPKc00670d2cf6f45c785a326d46a5483b9GmyYSH0NpEuXQByjfdbj5THuYNXpwK24JU7U2xkP_jEcBLPrgRyo5agF6lxVX4sl";
+
+                    const map = new Map({
+                        basemap: "arcgis-navigation" // Basemap layer service
+                    })
+
+                    const view = new MapView({
+                        map: map,
+                        center: [-40, 28], // Longitude, latitude
+                        zoom: 2, // Zoom level
+                        container: "viewDiv" // Div element
+                    });
+
+                    const locate = new Locate({
+                        view: view,
+                        useHeadingEnabled: false,
+                        goToOverride: function(view, options) {
+                            options.target.scale = 1500;
+                            return view.goTo(options.target);
+                        }
+                    });
+
+                    view.ui.add(locate, "top-left");
+                }
+            );
+        </script>
     </head>
 
     <body>
@@ -28,5 +69,7 @@
                 </li>
             </ul>
         </div>
+
+        <div id="viewDiv"></div>
     </body>
 </html>
